@@ -1,612 +1,740 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wasutha Chalermsuk | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        secondary: '#8b5cf6',
-                        accent: '#06b6d4',
-                        dark: '#0f172a',
-                        darker: '#020617',
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 1s ease-out',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                    },
-                },
-            },
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
-            padding: 2px;
-            border-radius: 1rem;
-        }
-        .gradient-border-inner {
-            background: #0f172a;
-            border-radius: calc(1rem - 2px);
-            height: 100%;
-        }
-        .glass {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-        }
-        .skill-bar {
-            background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasutha Chalermsuk | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --surface-alt: #F1F5F9;
+      --ink: #0F172A;
+      --ink-secondary: #334155;
+      --ink-muted: #64748B;
+      --accent: #3730A3;
+      --accent-light: #EEF2FF;
+      --accent-glow: #4F46E5;
+      --border: #E2E8F0;
+      --border-light: #F1F5F9;
+      --success: #059669;
+      --warning: #D97706;
+      --radius: 6px;
+      --radius-lg: 10px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --font-display: 'Public Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 250, 252, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    nav .logo span { color: var(--accent); }
+    nav .nav-links { display: flex; gap: 6px; }
+    nav .nav-links a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: color 150ms, background 150ms;
+    }
+    nav .nav-links a:hover { color: var(--ink); background: var(--surface-alt); }
+
+    /* ===== LAYOUT ===== */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    section + section { border-top: 1px solid var(--border-light); }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      color: var(--ink-muted);
+      font-size: 0.9375rem;
+      max-width: 560px;
+      margin-bottom: 40px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 100px 24px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero .greeting {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+    .hero h1 .highlight {
+      color: var(--accent);
+      position: relative;
+    }
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--ink-secondary);
+      max-width: 520px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .hero .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .hero .tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--ink-muted);
+      background: var(--surface);
+      letter-spacing: 0.02em;
+    }
+    .hero .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 150ms, box-shadow 150ms;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+      box-shadow: var(--shadow);
+    }
+    .btn-primary:hover { background: var(--accent-glow); }
+    .btn-outline {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .about-text { font-size: 0.9375rem; color: var(--ink-secondary); line-height: 1.8; }
+    .about-text strong { color: var(--ink); font-weight: 600; }
+    .interest-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .interest-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: border-color 150ms;
+    }
+    .interest-card:hover { border-color: var(--accent); }
+    .interest-card .icon {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .interest-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
+    .interest-card p { font-size: 0.8125rem; color: var(--ink-muted); line-height: 1.5; }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .project-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .project-card .stack {
+      display: flex; flex-wrap: wrap; gap: 4px;
+      margin-bottom: 12px;
+    }
+    .project-card .stack span {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      padding: 3px 8px;
+      background: var(--surface-alt);
+      border-radius: 4px;
+      color: var(--ink-muted);
+      letter-spacing: 0.03em;
+    }
+    .project-card h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 6px; }
+    .project-card p { font-size: 0.8125rem; color: var(--ink-muted); line-height: 1.6; flex: 1; margin-bottom: 16px; }
+    .project-card .metrics {
+      display: flex; gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-muted);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-bottom: 16px;
+    }
+    .project-card .metrics strong { color: var(--accent); font-size: 0.8125rem; }
+    .project-card .links { display: flex; gap: 8px; }
+    .project-card .links a {
+      font-size: 0.8125rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 150ms;
+    }
+    .project-card .links a:hover { color: var(--accent-glow); }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .skill-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .skill-category h3 {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .skill-tags span {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      background: var(--surface-alt);
+      border-radius: 4px;
+      color: var(--ink-secondary);
+      font-weight: 500;
+    }
+    .skill-tags span.prof {
+      background: #EEF2FF;
+      color: #3730A3;
+      border: 1px solid #C7D2FE;
+    }
+    .skill-tags span.fam {
+      background: #F0FDF4;
+      color: #166534;
+      border: 1px solid #BBF7D0;
+    }
+    .skill-tags span.lrn {
+      background: #FFF7ED;
+      color: #9A3412;
+      border: 1px solid #FED7AA;
+    }
+    .proficiency-key {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      align-items: center;
+    }
+    .proficiency-key .dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .proficiency-key .dot.prof { background: #3730A3; }
+    .proficiency-key .dot.fam { background: #166534; }
+    .proficiency-key .dot.lrn { background: #9A3412; }
+
+    /* ===== LEARNING ===== */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .learning-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color 150ms;
+    }
+    .learning-card:hover { border-color: var(--accent); }
+    .learning-card h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .learning-card p {
+      font-size: 0.8125rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== RESUME ===== */
+    .resume-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .resume-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 4px; }
+    .resume-card p { font-size: 0.875rem; color: var(--ink-muted); }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color 150ms;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-card:hover { border-color: var(--accent); }
+    .contact-card .label {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .contact-card .value {
+      font-size: 0.875rem;
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-light);
+      color: var(--ink-muted);
+      font-size: 0.8125rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .learning-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+      section { padding: 48px 20px; }
+    }
+    @media (max-width: 480px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      nav .nav-links a { font-size: 0.75rem; padding: 4px 8px; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: fadeUp 400ms ease-out forwards;
+      }
+      @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
 </head>
-<body class="bg-darker text-gray-100 antialiased">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="#" class="text-2xl font-bold gradient-text">WC</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-primary transition-colors duration-300">Home</a>
-                    <a href="#about" class="hover:text-primary transition-colors duration-300">About</a>
-                    <a href="#projects" class="hover:text-primary transition-colors duration-300">Projects</a>
-                    <a href="#skills" class="hover:text-primary transition-colors duration-300">Skills</a>
-                    <a href="#resume" class="hover:text-primary transition-colors duration-300">Resume</a>
-                    <a href="#contact" class="hover:text-primary transition-colors duration-300">Contact</a>
-                </div>
-                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-800">
-            <div class="px-4 pt-2 pb-4 space-y-2">
-                <a href="#home" class="block py-2 hover:text-primary transition-colors">Home</a>
-                <a href="#about" class="block py-2 hover:text-primary transition-colors">About</a>
-                <a href="#projects" class="block py-2 hover:text-primary transition-colors">Projects</a>
-                <a href="#skills" class="block py-2 hover:text-primary transition-colors">Skills</a>
-                <a href="#resume" class="block py-2 hover:text-primary transition-colors">Resume</a>
-                <a href="#contact" class="block py-2 hover:text-primary transition-colors">Contact</a>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
-        </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">W<span>C</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#learning">Learning</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center">
-                <div class="animate-fade-in">
-                    <p class="text-accent text-lg mb-4 font-medium">Hello, I'm</p>
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6">
-                        <span class="gradient-text">Wasutha Chalermsuk</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-gray-400 mb-8 animate-slide-up">
-                        Computational Mathematics Student & Developer
-                    </p>
-                    <div class="flex flex-wrap justify-center gap-4 mb-12 animate-slide-up" style="animation-delay: 0.2s;">
-                        <span class="px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary text-sm">AI/ML Enthusiast</span>
-                        <span class="px-4 py-2 bg-secondary/10 border border-secondary/30 rounded-full text-secondary text-sm">Full-Stack Developer</span>
-                        <span class="px-4 py-2 bg-accent/10 border border-accent/30 rounded-full text-accent text-sm">Algorithmic Trading</span>
-                    </div>
-                    <div class="flex justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
-                        <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 transform hover:-translate-y-1">
-                            View My Work
-                        </a>
-                        <a href="https://github.com/WasuthaChalermsuk/Cv-Wasutha" target="_blank" class="px-8 py-3 bg-accent text-darker rounded-full font-semibold hover:shadow-lg hover:shadow-accent/50 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2">
-                            <i class="fas fa-file-alt"></i> View Resume
-                        </a>
-                        <a href="#contact" class="px-8 py-3 border border-gray-600 rounded-full font-semibold hover:border-primary hover:text-primary transition-all duration-300 transform hover:-translate-y-1">
-                            Get In Touch
-                        </a>
-                    </div>
-                </div>
-                <div class="mt-16 animate-slide-up" style="animation-delay: 0.6s;">
-                    <a href="#about" class="text-gray-500 hover:text-primary transition-colors">
-                        <i class="fas fa-chevron-down text-2xl animate-bounce"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<header class="hero">
+  <p class="greeting">01 — HELLO</p>
+  <h1>Wasutha <span class="highlight">Chalermsuk</span></h1>
+  <p class="subtitle">
+    Computational Mathematics student at KMUTNB. I build software at the intersection of 
+    mathematical rigor and engineering craft.
+  </p>
+  <div class="tag-row">
+    <span class="tag">AI / ML</span>
+    <span class="tag">Full-Stack Dev</span>
+    <span class="tag">Algo Trading</span>
+    <span class="tag">Bangkok, TH</span>
+  </div>
+  <div class="cta-row">
+    <a href="#projects" class="btn btn-primary">View My Work</a>
+    <a href="https://github.com/WasuthaChalermsuk/Cv-Wasutha" class="btn btn-outline">View Resume</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+</header>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="gradient-border p-1">
-                    <div class="gradient-border-inner p-8">
-                        <div class="text-6xl text-primary mb-4">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Education</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            I'm a 3rd year student (entering 4th year) at <strong class="text-white">King Mongkut's University of Technology North Bangkok (KMUTNB)</strong>, 
-                            Faculty of Applied Science, majoring in <strong class="text-white">Computational Mathematics</strong>.
-                        </p>
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Passionate about leveraging technology to solve real-world problems. My journey combines the analytical rigor of mathematics 
-                        with the creative power of software development.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-4 bg-darker rounded-xl border border-gray-800 hover:border-primary/50 transition-colors">
-                            <i class="fas fa-brain text-3xl text-primary mb-3"></i>
-                            <h4 class="font-semibold mb-1">AI / ML</h4>
-                            <p class="text-sm text-gray-500">Machine Learning & AI Solutions</p>
-                        </div>
-                        <div class="p-4 bg-darker rounded-xl border border-gray-800 hover:border-secondary/50 transition-colors">
-                            <i class="fas fa-chart-line text-3xl text-secondary mb-3"></i>
-                            <h4 class="font-semibold mb-1">Trading</h4>
-                            <p class="text-sm text-gray-500">Stock & Algorithmic Trading</p>
-                        </div>
-                        <div class="p-4 bg-darker rounded-xl border border-gray-800 hover:border-accent/50 transition-colors">
-                            <i class="fas fa-code text-3xl text-accent mb-3"></i>
-                            <h4 class="font-semibold mb-1">Development</h4>
-                            <p class="text-sm text-gray-500">Full-Stack Web Development</p>
-                        </div>
-                        <div class="p-4 bg-darker rounded-xl border border-gray-800 hover:border-primary/50 transition-colors">
-                            <i class="fas fa-robot text-3xl text-primary mb-3"></i>
-                            <h4 class="font-semibold mb-1">EA Systems</h4>
-                            <p class="text-sm text-gray-500">Expert Advisors & Automation</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">02 — ABOUT</p>
+  <h2 class="section-title">Background</h2>
+  <p class="section-desc">Mathematics + code. That's where I operate.</p>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-darker">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">My <span class="gradient-text">Projects</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">A collection of my work showcasing my skills in web development, AI/ML, and algorithmic trading.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="group relative bg-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20">
-                    <div class="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <i class="fas fa-shoe-prints text-6xl text-primary/50 group-hover:text-primary transition-colors"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded">JavaScript</span>
-                            <span class="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded">HTML5</span>
-                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">CSS3</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">E-Commerce Shoe Store</h3>
-                        <p class="text-gray-400 text-sm mb-4">Full-featured online shoe store with shopping cart, product catalog, checkout flow, and mobile-responsive design.</p>
-                        <a href="https://github.com/WasuthaChalermsuk/My-Web-Shoes-Store" target="_blank" class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a 4<sup>th</sup> year student at <strong>King Mongkut's University of Technology North Bangkok (KMUTNB)</strong>, 
+        Faculty of Applied Science, majoring in <strong>Computational Mathematics</strong>.
+      </p>
+      <p style="margin-top:12px;">
+        My approach combines analytical rigor from mathematics with the creative power of software development. 
+        I'm passionate about leveraging technology to solve real-world problems — whether that's training ML models, 
+        building full-stack applications, or designing automated trading systems.
+      </p>
+    </div>
+    <div class="interest-grid">
+      <div class="interest-card">
+        <div class="icon">AI</div>
+        <h4>AI / ML</h4>
+        <p>Machine Learning & AI Solutions</p>
+      </div>
+      <div class="interest-card">
+        <div class="icon">📈</div>
+        <h4>Trading</h4>
+        <p>Stock & Algorithmic Trading</p>
+      </div>
+      <div class="interest-card">
+        <div class="icon">&lt;/&gt;</div>
+        <h4>Development</h4>
+        <p>Full-Stack Web Development</p>
+      </div>
+      <div class="interest-card">
+        <div class="icon">⚙</div>
+        <h4>EA Systems</h4>
+        <p>Expert Advisors & Automation</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- Project 2 -->
-                <div class="group relative bg-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-secondary/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-secondary/20">
-                    <div class="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
-                        <i class="fas fa-layer-group text-6xl text-secondary/50 group-hover:text-secondary transition-colors"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded">React</span>
-                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">Node.js</span>
-                            <span class="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded">Express</span>
-                            <span class="px-2 py-1 bg-green-600/20 text-green-500 text-xs rounded">MongoDB</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-secondary transition-colors">Yajai Web Application</h3>
-                        <p class="text-gray-400 text-sm mb-4">Complete full-stack platform with user authentication, RESTful API, and real-time data management.</p>
-                        <div class="flex gap-4">
-                            <a href="https://github.com/WasuthaChalermsuk/yajai-frontend" target="_blank" class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors text-sm">
-                                <i class="fab fa-github"></i> Frontend
-                            </a>
-                            <a href="https://github.com/WasuthaChalermsuk/yajai-backend" target="_blank" class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors text-sm">
-                                <i class="fab fa-github"></i> Backend
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">03 — PROJECTS</p>
+  <h2 class="section-title">Selected Work</h2>
+  <p class="section-desc">A collection spanning web development, AI/ML, and algorithmic trading.</p>
 
-                <!-- Project 3 -->
-                <div class="group relative bg-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-accent/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20">
-                    <div class="h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
-                        <i class="fas fa-palette text-6xl text-accent/50 group-hover:text-accent transition-colors"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">Figma</span>
-                            <span class="px-2 py-1 bg-pink-500/20 text-pink-400 text-xs rounded">UI/UX Design</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">UX/UI Design Collection</h3>
-                        <p class="text-gray-400 text-sm mb-4">Collection of user interface designs, wireframes, and prototypes demonstrating design thinking principles.</p>
-                        <a href="https://github.com/WasuthaChalermsuk/UX-UI" target="_blank" class="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="stack">
+        <span>JavaScript</span><span>HTML5</span><span>CSS3</span>
+      </div>
+      <h3>E-Commerce Shoe Store</h3>
+      <p>Full-featured online shoe store with shopping cart, product catalog, checkout flow, and mobile-responsive design.</p>
+      <div class="links">
+        <a href="https://github.com/WasuthaChalermsuk/My-Web-Shoes-Store">View on GitHub →</a>
+      </div>
+    </div>
 
-                <!-- Project 4 -->
-                <div class="group relative bg-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-secondary/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-secondary/20">
-                    <div class="h-48 bg-gradient-to-br from-secondary/20 to-purple-500/20 flex items-center justify-center">
-                        <i class="fas fa-id-card text-6xl text-secondary/50 group-hover:text-secondary transition-colors"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded">HTML5</span>
-                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">CSS3</span>
-                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">Responsive Design</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-secondary transition-colors">Personal CV Website</h3>
-                        <p class="text-gray-400 text-sm mb-4">Responsive personal portfolio and CV website showcasing education, skills, and professional background.</p>
-                        <a href="https://github.com/WasuthaChalermsuk/Cv-Wasutha" target="_blank" class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
+    <div class="project-card">
+      <div class="stack">
+        <span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span>
+      </div>
+      <h3>Yajai Web Application</h3>
+      <p>Full-stack platform with user authentication, RESTful API, and real-time data management.</p>
+      <div class="links">
+        <a href="https://github.com/WasuthaChalermsuk/yajai-frontend">Frontend</a>
+        <a href="https://github.com/WasuthaChalermsuk/yajai-backend">Backend</a>
+      </div>
+    </div>
 
-                <!-- Project 5 -->
-                <div class="group relative bg-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20">
-                    <div class="h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                        <i class="fas fa-brain text-6xl text-primary/50 group-hover:text-primary transition-colors"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">Python</span>
-                            <span class="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded">scikit-learn</span>
-                            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded">pandas</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">ML Stock Price Predictor</h3>
-                        <p class="text-gray-400 text-sm mb-4">Machine learning model using Random Forest to predict stock prices. Features engineered from historical data including moving averages, volume, and price changes.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">RMSE $16.54</span>
-                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">MAE $14.06</span>
-                            <span class="px-2 py-1 bg-pink-500/20 text-pink-400 text-xs rounded">MAPE 5.20%</span>
-                        </div>
-                        <a href="https://github.com/WasuthaChalermsuk/stock-price-predictor" target="_blank" class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
+    <div class="project-card">
+      <div class="stack">
+        <span>Figma</span><span>UI/UX</span>
+      </div>
+      <h3>UX/UI Design Collection</h3>
+      <p>Collection of interface designs, wireframes, and prototypes demonstrating design thinking principles.</p>
+      <div class="links">
+        <a href="https://github.com/WasuthaChalermsuk/UX-UI">View on GitHub →</a>
+      </div>
+    </div>
 
-                <!-- Project 6 -->
-                <div class="group relative bg-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-accent/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20">
-                    <div class="h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
-                        <i class="fas fa-terminal text-6xl text-accent/50 group-hover:text-accent transition-colors"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">TypeScript</span>
-                            <span class="px-2 py-1 bg-gray-800/80 text-gray-300 text-xs rounded">Next.js</span>
-                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">Node.js</span>
-                            <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">CLI</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">create-next-pro</h3>
-                        <p class="text-gray-400 text-sm mb-4">CLI tool to scaffold Next.js projects with best practices and built-in API mocking. Supports TypeScript, Tailwind CSS, and mock API server.</p>
-                        <a href="https://github.com/WasuthaChalermsuk/create-next-pro" target="_blank" class="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
+    <div class="project-card">
+      <div class="stack">
+        <span>HTML5</span><span>CSS3</span><span>Responsive</span>
+      </div>
+      <h3>Personal CV Website</h3>
+      <p>Responsive portfolio and CV website showcasing education, skills, and professional background.</p>
+      <div class="links">
+        <a href="https://github.com/WasuthaChalermsuk/Cv-Wasutha">View on GitHub →</a>
+      </div>
+    </div>
 
-                <!-- More Projects Coming -->
-                <div class="group relative bg-dark/50 rounded-2xl overflow-hidden border border-dashed border-gray-700 flex items-center justify-center min-h-[320px]">
-                    <div class="text-center p-6">
-                        <i class="fas fa-plus-circle text-5xl text-gray-600 mb-4 group-hover:text-primary transition-colors"></i>
-                        <h3 class="text-xl font-bold text-gray-500">More Coming Soon</h3>
-                        <p class="text-gray-600 text-sm mt-2">Stay tuned for new projects!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="project-card">
+      <div class="stack">
+        <span>Python</span><span>scikit-learn</span><span>pandas</span>
+      </div>
+      <h3>ML Stock Price Predictor</h3>
+      <p>Random Forest model predicting stock prices from historical data with engineered features.</p>
+      <div class="metrics">
+        <div>RMSE <br><strong>$16.54</strong></div>
+        <div>MAE <br><strong>$14.06</strong></div>
+        <div>MAPE <br><strong>5.20%</strong></div>
+      </div>
+      <div class="links">
+        <a href="https://github.com/WasuthaChalermsuk/stock-price-predictor">View on GitHub →</a>
+      </div>
+    </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">Technologies and tools I work with on a daily basis.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Programming Languages -->
-                <div class="bg-darker rounded-2xl p-6 border border-gray-800 hover:border-primary/30 transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-code text-2xl text-primary"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Languages</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm font-medium">JavaScript</span>
-                        <span class="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm font-medium">Python</span>
-                        <span class="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">HTML/CSS</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">TypeScript</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">SQL</span>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-800">
-                        <div class="flex items-center gap-2 text-sm">
-                            <span class="w-2 h-2 bg-primary rounded-full"></span>
-                            <span class="text-gray-400">Proficient: JavaScript, HTML/CSS</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm mt-2">
-                            <span class="w-2 h-2 bg-secondary rounded-full"></span>
-                            <span class="text-gray-400">Familiar: Python, TypeScript</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm mt-2">
-                            <span class="w-2 h-2 bg-accent rounded-full"></span>
-                            <span class="text-gray-400">Learning: Advanced React Patterns</span>
-                        </div>
-                    </div>
-                </div>
+    <div class="project-card">
+      <div class="stack">
+        <span>TypeScript</span><span>Next.js</span><span>Node.js</span><span>CLI</span>
+      </div>
+      <h3>create-next-pro</h3>
+      <p>CLI tool to scaffold Next.js projects with best practices, TypeScript, Tailwind CSS, and mock API server.</p>
+      <div class="links">
+        <a href="https://github.com/WasuthaChalermsuk/create-next-pro">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- Frontend -->
-                <div class="bg-darker rounded-2xl p-6 border border-gray-800 hover:border-secondary/30 transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-laptop-code text-2xl text-secondary"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Frontend</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">React</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Vue.js</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Tailwind CSS</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Bootstrap</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Responsive Design</span>
-                    </div>
-                </div>
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">04 — CAPABILITIES</p>
+  <h2 class="section-title">Skills</h2>
+  <p class="section-desc">Technologies and tools I work with — grouped by proficiency.</p>
 
-                <!-- Backend -->
-                <div class="bg-darker rounded-2xl p-6 border border-gray-800 hover:border-accent/30 transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-server text-2xl text-accent"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Backend</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">Node.js</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">Express</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">REST API</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">MongoDB</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">SQL</span>
-                    </div>
-                </div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <span class="prof">JavaScript</span><span class="prof">HTML/CSS</span><span class="fam">Python</span><span class="fam">TypeScript</span><span class="fam">SQL</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Frontend</h3>
+      <div class="skill-tags">
+        <span class="prof">React</span><span class="fam">Vue.js</span><span class="prof">Tailwind CSS</span><span class="fam">Bootstrap</span><span class="fam">Responsive</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Backend</h3>
+      <div class="skill-tags">
+        <span class="prof">Node.js</span><span class="prof">Express</span><span class="fam">REST API</span><span class="fam">MongoDB</span><span class="lrn">SQL</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>AI / ML</h3>
+      <div class="skill-tags">
+        <span class="fam">TensorFlow</span><span class="fam">PyTorch</span><span class="fam">Scikit-learn</span><span class="fam">LLM APIs</span><span class="fam">Data Analysis</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Tools</h3>
+      <div class="skill-tags">
+        <span class="prof">Git</span><span class="prof">GitHub</span><span class="prof">VS Code</span><span class="fam">Figma</span><span class="fam">Docker</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Trading</h3>
+      <div class="skill-tags">
+        <span class="fam">Technical Analysis</span><span class="fam">Algo Trading</span><span class="fam">MQL4/5</span><span class="lrn">Trading Bots</span><span class="lrn">Market Data</span>
+      </div>
+    </div>
+  </div>
 
-                <!-- AI/ML -->
-                <div class="bg-darker rounded-2xl p-6 border border-gray-800 hover:border-primary/30 transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-brain text-2xl text-primary"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">AI / ML</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">TensorFlow</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">PyTorch</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">Scikit-learn</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">LLM APIs</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-primary/20 hover:text-primary transition-colors cursor-default">Data Analysis</span>
-                    </div>
-                </div>
+  <div class="proficiency-key">
+    <span><span class="dot prof"></span> Proficient</span>
+    <span><span class="dot fam"></span> Familiar</span>
+    <span><span class="dot lrn"></span> Learning</span>
+  </div>
+</section>
 
-                <!-- Tools -->
-                <div class="bg-darker rounded-2xl p-6 border border-gray-800 hover:border-secondary/30 transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-tools text-2xl text-secondary"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Tools</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Git</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">GitHub</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">VS Code</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Figma</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-secondary/20 hover:text-secondary transition-colors cursor-default">Docker</span>
-                    </div>
-                </div>
+<!-- LEARNING -->
+<section id="learning">
+  <p class="section-label">05 — IN PROGRESS</p>
+  <h2 class="section-title">What I'm Learning</h2>
+  <p class="section-desc">Currently expanding my skills in these areas.</p>
 
-                <!-- Trading -->
-                <div class="bg-darker rounded-2xl p-6 border border-gray-800 hover:border-accent/30 transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-chart-line text-2xl text-accent"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Trading</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">Technical Analysis</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">Algorithmic Trading</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">MQL4/5</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">Trading Bots</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm hover:bg-accent/20 hover:text-accent transition-colors cursor-default">Market Data</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="learning-grid">
+    <div class="learning-card">
+      <h4>Advanced React Patterns</h4>
+      <p>Server Components, Suspense boundaries, and performance optimization for Next.js applications.</p>
+    </div>
+    <div class="learning-card">
+      <h4>Agentic AI Systems</h4>
+      <p>Building autonomous AI agents, multi-agent orchestration, and tool-calling architectures.</p>
+    </div>
+    <div class="learning-card">
+      <h4>Algorithmic Trading Strategies</h4>
+      <p>Backtesting frameworks, quantitative analysis, and automated EA development for MetaTrader.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- Resume Section -->
-    <section id="resume" class="py-20 bg-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">My <span class="gradient-text">Resume</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-accent to-primary mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">View or download my complete CV for more details about my experience and qualifications.</p>
-            </div>
-            <div class="max-w-3xl mx-auto">
-                <div class="gradient-border p-1 rounded-2xl">
-                    <div class="gradient-border-inner bg-darker rounded-2xl p-8 md:p-12 text-center">
-                        <div class="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-file-pdf text-4xl text-accent"></i>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Wasutha Chalermsuk</h3>
-                        <p class="text-gray-400 mb-6">Computational Mathematics Student at KMUTNB</p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="https://github.com/WasuthaChalermsuk/Cv-Wasutha" target="_blank" class="px-8 py-4 bg-gradient-to-r from-accent to-primary rounded-full font-semibold text-darker hover:shadow-lg hover:shadow-accent/50 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                                <i class="fas fa-external-link-alt"></i> View CV on GitHub
-                            </a>
-                        </div>
-                        <p class="text-gray-500 text-sm mt-6">
-                            <i class="fas fa-info-circle mr-2"></i>
-                            Includes education, skills, projects, and contact information
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- RESUME -->
+<section id="resume">
+  <p class="section-label">06 — RESUME</p>
+  <h2 class="section-title">Curriculum Vitae</h2>
+  <p class="section-desc">View or download my complete CV for more details about my experience and qualifications.</p>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-darker">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">Have a project in mind? Let's work together!</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-                <!-- Email -->
-                <a href="mailto:wasutha.chalermsuk@gmail.com" class="group bg-dark rounded-2xl p-8 border border-gray-800 hover:border-primary/50 transition-all duration-300 text-center hover:transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                        <i class="fas fa-envelope text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">Email</h3>
-                    <p class="text-gray-400 text-sm truncate px-2" title="wasutha.chalermsuk@gmail.com">wasutha.chalermsuk@gmail.com</p>
-                </a>
+  <div class="resume-card">
+    <div>
+      <h3>Wasutha Chalermsuk</h3>
+      <p>Computational Mathematics Student at KMUTNB — includes education, skills, projects, and contact information.</p>
+    </div>
+    <a href="https://github.com/WasuthaChalermsuk/Cv-Wasutha" class="btn btn-primary">View CV on GitHub</a>
+  </div>
+</section>
 
-                <!-- Phone -->
-                <a href="tel:+66815894099" class="group bg-dark rounded-2xl p-8 border border-gray-800 hover:border-secondary/50 transition-all duration-300 text-center hover:transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-secondary/20 transition-colors">
-                        <i class="fas fa-phone text-2xl text-secondary"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">Phone</h3>
-                    <p class="text-gray-400 text-sm">081-589-4099</p>
-                </a>
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">07 — CONNECT</p>
+  <h2 class="section-title">Get In Touch</h2>
+  <p class="section-desc">Have a project in mind? Let's work together.</p>
 
-                <!-- GitHub -->
-                <a href="https://github.com/WasuthaChalermsuk" target="_blank" class="group bg-dark rounded-2xl p-8 border border-gray-800 hover:border-accent/50 transition-all duration-300 text-center hover:transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
-                        <i class="fab fa-github text-2xl text-accent"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">GitHub</h3>
-                    <p class="text-gray-400 text-sm">@WasuthaChalermsuk</p>
-                </a>
+  <div class="contact-grid">
+    <a href="mailto:wasutha.chalermsuk@gmail.com" class="contact-card">
+      <span class="label">Email</span>
+      <span class="value">wasutha.chalermsuk@gmail.com</span>
+    </a>
+    <a href="tel:+668****4099" class="contact-card">
+      <span class="label">Phone</span>
+      <span class="value">081-589-4099</span>
+    </a>
+    <a href="https://github.com/WasuthaChalermsuk" class="contact-card">
+      <span class="label">GitHub</span>
+      <span class="value">@WasuthaChalermsuk</span>
+    </a>
+    <a href="https://wasuthachalermsuk.github.io/Personal-Website/" class="contact-card">
+      <span class="label">Website</span>
+      <span class="value">wasuthachalermsuk.github.io</span>
+    </a>
+  </div>
+</section>
 
-                <!-- Website -->
-                <a href="https://wasuthachalermsuk.github.io/Personal-Website/" target="_blank" class="group bg-dark rounded-2xl p-8 border border-gray-800 hover:border-primary/50 transition-all duration-300 text-center hover:transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                        <i class="fas fa-globe text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">Website</h3>
-                    <p class="text-gray-400 text-sm truncate px-2" title="wasuthachalermsuk.github.io/Personal-Website">wasuthachalermsuk.github.io/Personal-Website</p>
-                </a>
-            </div>
-        </div>
-    </section>
+<footer>
+  <p>&copy; 2026 Wasutha Chalermsuk &middot; <a href="https://github.com/WasuthaChalermsuk">GitHub</a> &middot; <a href="mailto:wasutha.chalermsuk@gmail.com">Email</a></p>
+</footer>
 
-    <!-- Footer -->
-    <footer class="py-8 bg-dark border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-2xl font-bold gradient-text">WC</div>
-                <p class="text-gray-500 text-sm">
-                    © 2026 Wasutha Chalermsuk. All rights reserved.
-                </p>
-                <div class="flex gap-4">
-                    <a href="https://github.com/WasuthaChalermsuk" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:wasutha.chalermsuk@gmail.com" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Mobile Menu Script -->
-    <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when clicking on a link
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-lg');
-            } else {
-                nav.classList.remove('shadow-lg');
-            }
-        });
-    </script>
 </body>
 </html>
